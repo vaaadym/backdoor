@@ -1,4 +1,4 @@
-#server
+####################################################### server
 
 import vidstream import *
 import socket
@@ -31,7 +31,7 @@ while True:
         os.system("cls")
 
 
-#client
+###################################################### client
 
 from vidstream import *
 import socket
